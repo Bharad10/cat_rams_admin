@@ -5,6 +5,7 @@ import 'package:cat_rams_admin/screens/home/service_history_from_home.dart';
 import 'package:cat_rams_admin/screens/home/service_list_from_home.dart';
 import 'package:cat_rams_admin/screens/home/tool_history_from_home.dart';
 import 'package:cat_rams_admin/screens/home/tool_list_from_home.dart';
+import 'package:cat_rams_admin/screens/notification/notificationpage.dart';
 import 'package:cat_rams_admin/services/post_auth_service.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -162,21 +163,33 @@ class HomePageState extends State<HomePage> {
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               Text(
-                                'Welcome back',
+                                'Welcome',
                                 style:
                                     secondaryTextStyle(color: black, size: 14),
                               ),
                               Text(cut_name, style: boldTextStyle(size: 16)),
                             ],
                           ).expand(),
-                          RadiantGradientMask(
-                            child: Image.asset(
-                              ImageConst.notification_bell,
-                              height: 25,
-                              width: 25,
-                              fit: BoxFit.cover,
+                          GestureDetector(
+                            onTap: () {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) {
+                                    return NotificationPage();
+                                  },
+                                ),
+                              );
+                            },
+                            child: RadiantGradientMask(
+                              child: Image.asset(
+                                ImageConst.notification_bell,
+                                height: 25,
+                                width: 25,
+                                fit: BoxFit.cover,
+                              ),
                             ),
-                          ),
+                          )
                         ],
                       ),
                       SizedBox(

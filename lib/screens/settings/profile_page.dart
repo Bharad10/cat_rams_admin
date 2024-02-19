@@ -178,7 +178,6 @@ class ProfilePageState extends State<ProfilePage> {
                         },
                       ),
                     );
-                    ;
                   },
                   trailing: Icon(Icons.arrow_forward_ios_rounded,
                       size: 18, color: context.iconColor),
