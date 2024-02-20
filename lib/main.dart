@@ -67,6 +67,6 @@ var routes = <String, WidgetBuilder>{
 
 class Routes {
   static const SPLASH = "/";
-  static const bottombar = "screens/bottom_tab/bottomtab.dart";
-  static const loginPage = "screens/auth_screens/login_page.dart";
+  static const bottombar = "screens/bottom_bar/bottomtab.dart";
+  static const loginPage = "screens/auth_screens/login_screen.dart";
 }

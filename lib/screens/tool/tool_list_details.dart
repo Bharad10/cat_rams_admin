@@ -35,17 +35,13 @@ class ToolDetailsPageState extends State<ToolDetailsPage> {
     print(base64.encode(utf8.encode(widget.toolrstid)));
     super.initState();
     Future.delayed(Duration.zero, () {
-      init();
+      CustomerToolRequestDetails();
     });
   }
 
-  Future<void> init() async {
-    CustomerToolRequestDetails();
-  }
-
   @override
-  void setState(fn) {
-    if (mounted) super.setState(fn);
+  void dispose() {
+    super.dispose();
   }
 
   CustomerToolRequestDetails() async {
@@ -138,7 +134,7 @@ class ToolDetailsPageState extends State<ToolDetailsPage> {
             maxChildSize: 1,
             builder: (context, scrollController) {
               return Container(
-                color: white,
+                color: context.cardColor,
                 padding: EdgeInsets.symmetric(vertical: 16),
                 child: SingleChildScrollView(
                   controller: scrollController,
@@ -182,7 +178,7 @@ class ToolDetailsPageState extends State<ToolDetailsPage> {
                                                 width: double.infinity,
                                                 child: Container(
                                                   child: Text(
-                                                    "Reject Reason*",
+                                                    "Reject Reason" + "*",
                                                     textAlign: TextAlign.left,
                                                   ),
                                                 ),
@@ -190,105 +186,112 @@ class ToolDetailsPageState extends State<ToolDetailsPage> {
                                             ],
                                           ),
                                           8.height,
-                                          Padding(
-                                            padding: EdgeInsets.all(2),
-                                            child: Container(
-                                              width: context.width() * 0.85,
-                                              decoration: const BoxDecoration(
-                                                  borderRadius:
-                                                      BorderRadius.all(
-                                                          Radius.circular(16)),
-                                                  color: white),
-                                              child: TextField(
-                                                  keyboardType: TextInputType
-                                                      .streetAddress,
-                                                  minLines: 1,
-                                                  maxLines: 5,
-                                                  maxLength: 80,
-                                                  onChanged: (value) {
-                                                    setBottomState(() {
-                                                      reject = value;
-                                                    });
-                                                  },
-                                                  focusNode: rejectFocus,
-                                                  textCapitalization:
-                                                      TextCapitalization
-                                                          .sentences,
-                                                  decoration: InputDecoration(
-                                                      counterText: "",
-                                                      hintText: "Enter Reason",
-                                                      hintStyle:
-                                                          primaryTextStyle(),
-                                                      focusedBorder:
-                                                          OutlineInputBorder(
-                                                        borderSide:
-                                                            const BorderSide(
-                                                                color: black,
-                                                                width: 0.5),
-                                                        borderRadius:
-                                                            BorderRadius
-                                                                .circular(10),
-                                                      ),
-                                                      enabledBorder:
-                                                          OutlineInputBorder(
-                                                        borderSide:
-                                                            const BorderSide(
-                                                                color: black,
-                                                                width: 0.5),
-                                                        borderRadius:
-                                                            BorderRadius
-                                                                .circular(10),
-                                                      ))),
-                                              alignment: Alignment.center,
-                                            ),
+                                          Container(
+                                            decoration: const BoxDecoration(
+                                                borderRadius: BorderRadius.all(
+                                                    Radius.circular(16)),
+                                                color: white),
+                                            child: TextField(
+                                                keyboardType:
+                                                    TextInputType.streetAddress,
+                                                minLines: 1,
+                                                maxLines: 5,
+                                                maxLength: 80,
+                                                onChanged: (value) {
+                                                  setState(() {
+                                                    reject = value;
+                                                  });
+                                                },
+                                                focusNode: rejectFocus,
+                                                textCapitalization:
+                                                    TextCapitalization
+                                                        .sentences,
+                                                decoration: InputDecoration(
+                                                    counterText: "",
+                                                    hintText: "Enter Reason",
+                                                    hintStyle:
+                                                        primaryTextStyle(),
+                                                    focusedBorder:
+                                                        OutlineInputBorder(
+                                                      borderSide:
+                                                          const BorderSide(
+                                                              color: black,
+                                                              width: 0.5),
+                                                      borderRadius:
+                                                          BorderRadius.circular(
+                                                              10),
+                                                    ),
+                                                    enabledBorder:
+                                                        OutlineInputBorder(
+                                                      borderSide:
+                                                          const BorderSide(
+                                                              color: black,
+                                                              width: 0.5),
+                                                      borderRadius:
+                                                          BorderRadius.circular(
+                                                              10),
+                                                    ))),
+                                            alignment: Alignment.center,
                                           ),
                                           16.height,
-                                          GestureDetector(
-                                            onTap: () async {
-                                              if (reject == "") {
-                                                setBottomState(
-                                                    () => issubmitted = false);
-                                                Fluttertoast.showToast(
-                                                    msg: "Enter Reason",
-                                                    toastLength:
-                                                        Toast.LENGTH_SHORT,
-                                                    gravity:
-                                                        ToastGravity.BOTTOM,
-                                                    timeInSecForIosWeb: 1,
-                                                    backgroundColor:
-                                                        const Color.fromARGB(
-                                                            255, 86, 84, 84),
-                                                    textColor: Colors.white,
-                                                    fontSize: 16.0);
-                                              } else {
-                                                try {
-                                                  setBottomState(
-                                                      () => issubmitted = true);
-                                                  Map data = {
-                                                    "tldet_id":
-                                                        toolrequestdetails[
-                                                            'tldet_id'],
-                                                    "tool_id":
-                                                        toolrequestdetails[
-                                                            'tool_id'],
-                                                    "tool_rent_quantity":
-                                                        toolrequestdetails[
-                                                            'tool_rent_quantity'],
-                                                  };
-                                                  Map req = {
-                                                    "data": data,
-                                                    "flag": 1,
-                                                    "rejectreason": reject,
-                                                  };
-                                                  await acceptorrejecttoolRequest(
-                                                          req)
-                                                      .then((value) {
-                                                    if (value['ret_data'] ==
-                                                        "success") {
-                                                      setBottomState((() {
-                                                        Fluttertoast.showToast(
-                                                          msg:
-                                                              "Request rejected successfully",
+                                          Row(
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment
+                                                      .spaceBetween,
+                                              children: <Widget>[
+                                                GestureDetector(
+                                                  onTap: () async {
+                                                    Navigator.pop(context);
+                                                    setState(() {});
+                                                  },
+                                                  child: Stack(
+                                                    alignment:
+                                                        Alignment.bottomCenter,
+                                                    children: [
+                                                      Container(
+                                                        height: height * 0.075,
+                                                        width: width * 0.4,
+                                                        alignment:
+                                                            Alignment.center,
+                                                        decoration:
+                                                            BoxDecoration(
+                                                          shape: BoxShape
+                                                              .rectangle,
+                                                          border: Border.all(
+                                                              color: black),
+                                                          borderRadius:
+                                                              BorderRadius.all(
+                                                                  Radius
+                                                                      .circular(
+                                                                          14)),
+                                                          gradient:
+                                                              LinearGradient(
+                                                            begin: Alignment
+                                                                .topLeft,
+                                                            end: Alignment
+                                                                .bottomRight,
+                                                            colors: [
+                                                              white,
+                                                              white
+                                                            ],
+                                                          ),
+                                                        ),
+                                                        child: Text(
+                                                          "BACK",
+                                                          style:
+                                                              boldTextStyle(),
+                                                        ),
+                                                      ),
+                                                    ],
+                                                  ),
+                                                ),
+                                                GestureDetector(
+                                                  onTap: () async {
+                                                    if (reject == "") {
+                                                      setBottomState(() =>
+                                                          issubmitted = false);
+                                                      Fluttertoast.showToast(
+                                                          msg: "Enter Reason",
                                                           toastLength: Toast
                                                               .LENGTH_SHORT,
                                                           gravity: ToastGravity
@@ -303,74 +306,154 @@ class ToolDetailsPageState extends State<ToolDetailsPage> {
                                                                   84),
                                                           textColor:
                                                               Colors.white,
-                                                          fontSize: 16.0,
-                                                        );
-                                                        Navigator
-                                                            .pushReplacementNamed(
-                                                                context,
-                                                                Routes
-                                                                    .bottombar);
-                                                      }));
+                                                          fontSize: 16.0);
                                                     } else {
-                                                      setBottomState(() =>
-                                                          issubmitted = false);
+                                                      try {
+                                                        setBottomState(() =>
+                                                            issubmitted = true);
+                                                        Map data = {
+                                                          "tldet_id":
+                                                              toolrequestdetails[
+                                                                  'tldet_id'],
+                                                          "tool_id":
+                                                              toolrequestdetails[
+                                                                  'tool_id'],
+                                                          "tool_rent_quantity":
+                                                              toolrequestdetails[
+                                                                  'tool_rent_quantity'],
+                                                        };
+                                                        Map req = {
+                                                          "data": data,
+                                                          "flag": 1,
+                                                          "rejectreason":
+                                                              reject,
+                                                        };
+                                                        print(req);
+                                                        await acceptorrejecttoolRequest(
+                                                                req)
+                                                            .then((value) {
+                                                          if (value[
+                                                                  'ret_data'] ==
+                                                              "success") {
+                                                            Navigator.pop(
+                                                                context);
+                                                            Fluttertoast.showToast(
+                                                                msg: "Rejected",
+                                                                toastLength: Toast
+                                                                    .LENGTH_SHORT,
+                                                                gravity:
+                                                                    ToastGravity
+                                                                        .BOTTOM,
+                                                                timeInSecForIosWeb:
+                                                                    1,
+                                                                backgroundColor:
+                                                                    const Color
+                                                                            .fromARGB(
+                                                                        255,
+                                                                        86,
+                                                                        84,
+                                                                        84),
+                                                                textColor:
+                                                                    Colors
+                                                                        .white,
+                                                                fontSize: 16.0);
+                                                          } else {
+                                                            print(value);
+                                                            setBottomState(() =>
+                                                                issubmitted =
+                                                                    false);
+                                                          }
+                                                        });
+                                                      } catch (e) {
+                                                        print(e.toString());
+                                                        setBottomState(() =>
+                                                            issubmitted =
+                                                                false);
+                                                        print(e.toString());
+                                                        Fluttertoast.showToast(
+                                                            msg:
+                                                                "Application Error. Contact Support",
+                                                            toastLength: Toast
+                                                                .LENGTH_SHORT,
+                                                            gravity:
+                                                                ToastGravity
+                                                                    .BOTTOM,
+                                                            timeInSecForIosWeb:
+                                                                1,
+                                                            backgroundColor:
+                                                                const Color
+                                                                        .fromARGB(
+                                                                    255,
+                                                                    86,
+                                                                    84,
+                                                                    84),
+                                                            textColor:
+                                                                Colors.white,
+                                                            fontSize: 16.0);
+                                                      }
+                                                      finish(context);
                                                     }
-                                                  });
-                                                } catch (e) {
-                                                  setState(() =>
-                                                      issubmitted = false);
-                                                  print(e.toString());
-                                                }
-                                                finish(context);
-                                              }
-                                            },
-                                            child: Stack(
-                                              alignment: Alignment.bottomCenter,
-                                              children: [
-                                                Container(
-                                                  height: height * 0.075,
-                                                  width: height * 0.4,
-                                                  alignment: Alignment.center,
-                                                  decoration: BoxDecoration(
-                                                    shape: BoxShape.rectangle,
-                                                    borderRadius:
-                                                        BorderRadius.all(
-                                                            Radius.circular(
-                                                                30)),
-                                                    gradient: LinearGradient(
-                                                      begin: Alignment.topLeft,
-                                                      end:
-                                                          Alignment.bottomRight,
-                                                      colors: [
-                                                        HexColor('#1d5ace'),
-                                                        HexColor('#04b7f9'),
-                                                      ],
-                                                    ),
-                                                  ),
-                                                  child: !issubmitted
-                                                      ? Text(
-                                                          "SUBMIT",
-                                                          style: boldTextStyle(
-                                                              color: white),
-                                                        )
-                                                      : Row(
-                                                          mainAxisAlignment:
-                                                              MainAxisAlignment
-                                                                  .center,
-                                                          children: [
-                                                            Transform.scale(
-                                                              scale: 0.7,
-                                                              child:
-                                                                  CircularProgressIndicator(
-                                                                color: white,
-                                                              ),
-                                                            ),
-                                                          ],
+                                                  },
+                                                  child: Stack(
+                                                    alignment:
+                                                        Alignment.bottomCenter,
+                                                    children: [
+                                                      Container(
+                                                        height: height * 0.075,
+                                                        width: width * 0.4,
+                                                        alignment:
+                                                            Alignment.center,
+                                                        decoration:
+                                                            BoxDecoration(
+                                                          shape: BoxShape
+                                                              .rectangle,
+                                                          borderRadius:
+                                                              BorderRadius.all(
+                                                                  Radius
+                                                                      .circular(
+                                                                          14)),
+                                                          gradient:
+                                                              LinearGradient(
+                                                            begin: Alignment
+                                                                .topLeft,
+                                                            end: Alignment
+                                                                .bottomRight,
+                                                            colors: [
+                                                              HexColor(
+                                                                  '#1d5ace'),
+                                                              HexColor(
+                                                                  '#04b7f9'),
+                                                            ],
+                                                          ),
                                                         ),
+                                                        child: !issubmitted
+                                                            ? Text(
+                                                                "SUBMIT",
+                                                                style: boldTextStyle(
+                                                                    color: Colors
+                                                                        .white),
+                                                              )
+                                                            : Row(
+                                                                mainAxisAlignment:
+                                                                    MainAxisAlignment
+                                                                        .center,
+                                                                children: [
+                                                                  Transform
+                                                                      .scale(
+                                                                    scale: 0.7,
+                                                                    child:
+                                                                        CircularProgressIndicator(
+                                                                      color:
+                                                                          white,
+                                                                    ),
+                                                                  ),
+                                                                ],
+                                                              ),
+                                                      ),
+                                                    ],
+                                                  ),
                                                 ),
-                                              ],
-                                            ),
-                                          ),
+                                              ]),
                                         ],
                                       ),
                                     ),
@@ -393,11 +476,6 @@ class ToolDetailsPageState extends State<ToolDetailsPage> {
         });
       },
     );
-  }
-
-  @override
-  void dispose() {
-    super.dispose();
   }
 
   @override
@@ -453,7 +531,7 @@ class ToolDetailsPageState extends State<ToolDetailsPage> {
                           child: CircularProgressIndicator(),
                         ),
                         imageUrl: dotenv.env['API_URL']! +
-                            'public/' +
+                            '/public/' +
                             toolrequestdetails['tool_images'],
                         fit: BoxFit.fill,
                       )

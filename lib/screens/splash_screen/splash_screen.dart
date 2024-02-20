@@ -47,7 +47,7 @@ class _SplashScreenState extends State<SplashScreen> {
         systemNavigationBarColor: Colors.black,
       ),
       child: Scaffold(
-        backgroundColor: black,
+        backgroundColor: white,
         body: Center(
           child: Image.asset(
             ImageConst.splashImage,

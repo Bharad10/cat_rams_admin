@@ -314,9 +314,12 @@ class ToolListFromHomeState extends State<ToolListFromHome> {
                                                                               MainAxisAlignment.spaceBetween,
                                                                           children: <
                                                                               Widget>[
-                                                                            Text(
-                                                                              toolrequestpendinglist[index].toolrqst_tool_name != null ? toolrequestpendinglist[index].toolrqst_tool_name : "",
-                                                                              style: boldTextStyle(),
+                                                                            Expanded(
+                                                                              child: Text(
+                                                                                toolrequestpendinglist[index].toolrqst_tool_name != null ? toolrequestpendinglist[index].toolrqst_tool_name : "",
+                                                                                style: boldTextStyle(),
+                                                                                overflow: TextOverflow.clip,
+                                                                              ),
                                                                             ),
                                                                           ],
                                                                         ),

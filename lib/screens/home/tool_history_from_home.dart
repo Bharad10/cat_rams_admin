@@ -314,15 +314,40 @@ class ToolRequestFromHomeState extends State<ToolRequestFromHome> {
                                                                               MainAxisAlignment.spaceBetween,
                                                                           children: <
                                                                               Widget>[
-                                                                            Text(
-                                                                              toolrequestcompletedlist[index].toolrqst_tool_name != null ? toolrequestcompletedlist[index].toolrqst_tool_name : "",
-                                                                              style: boldTextStyle(),
-                                                                            ),
-                                                                            Text(
-                                                                              toolrequestcompletedlist[index].toolrqst_number != null ? toolrequestcompletedlist[index].toolrqst_number : "",
-                                                                              style: primaryTextStyle(size: 12),
+                                                                            Expanded(
+                                                                              child: Text(
+                                                                                toolrequestcompletedlist[index].toolrqst_tool_name != null ? toolrequestcompletedlist[index].toolrqst_tool_name : "",
+                                                                                style: boldTextStyle(),
+                                                                                overflow: TextOverflow.clip,
+                                                                              ),
                                                                             ),
                                                                           ],
+                                                                        ),
+                                                                        // Row(
+                                                                        //   mainAxisAlignment:
+                                                                        //       MainAxisAlignment.spaceBetween,
+                                                                        //   children: <
+                                                                        //       Widget>[
+                                                                        //     Text(
+                                                                        //       toolrequestcompletedlist[index].toolrqst_tool_name != null ? toolrequestcompletedlist[index].toolrqst_tool_name : "",
+                                                                        //       style: boldTextStyle(),
+                                                                        //     ),
+                                                                        //     Text(
+                                                                        //       toolrequestcompletedlist[index].toolrqst_number != null ? toolrequestcompletedlist[index].toolrqst_number : "",
+                                                                        //       style: primaryTextStyle(size: 12),
+                                                                        //     ),
+                                                                        //   ],
+                                                                        // ),
+                                                                        SizedBox(
+                                                                          height:
+                                                                              4,
+                                                                        ),
+                                                                        Text(
+                                                                          toolrequestcompletedlist[index].toolrqst_number != null
+                                                                              ? toolrequestcompletedlist[index].toolrqst_number
+                                                                              : "",
+                                                                          style:
+                                                                              primaryTextStyle(size: 12),
                                                                         ),
                                                                         SizedBox(
                                                                           height:

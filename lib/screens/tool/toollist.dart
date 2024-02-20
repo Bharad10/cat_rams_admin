@@ -348,9 +348,12 @@ class ToolListState extends State<ToolList> {
                                                                                 Row(
                                                                                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                                                                   children: <Widget>[
-                                                                                    Text(
-                                                                                      toolrequestpendinglist[index].toolrqst_tool_name != null ? toolrequestpendinglist[index].toolrqst_tool_name : "",
-                                                                                      style: boldTextStyle(),
+                                                                                    Expanded(
+                                                                                      child: Text(
+                                                                                        toolrequestpendinglist[index].toolrqst_tool_name != null ? toolrequestpendinglist[index].toolrqst_tool_name : "",
+                                                                                        style: boldTextStyle(),
+                                                                                        overflow: TextOverflow.clip,
+                                                                                      ),
                                                                                     ),
                                                                                   ],
                                                                                 ),
@@ -359,7 +362,7 @@ class ToolListState extends State<ToolList> {
                                                                                 ),
                                                                                 Text(
                                                                                   toolrequestpendinglist[index].toolrqst_number != null ? toolrequestpendinglist[index].toolrqst_number : "",
-                                                                                  style: primaryTextStyle(size: 12),
+                                                                                  style: primaryTextStyle(size: 16),
                                                                                 ),
                                                                                 SizedBox(
                                                                                   height: 4,
@@ -668,15 +671,21 @@ class ToolListState extends State<ToolList> {
                                                                                 Row(
                                                                                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                                                                   children: <Widget>[
-                                                                                    Text(
-                                                                                      toolrequestcompletedlist[index].toolrqst_tool_name != null ? toolrequestcompletedlist[index].toolrqst_tool_name : "",
-                                                                                      style: boldTextStyle(),
-                                                                                    ),
-                                                                                    Text(
-                                                                                      toolrequestcompletedlist[index].toolrqst_number != null ? toolrequestcompletedlist[index].toolrqst_number : "",
-                                                                                      style: primaryTextStyle(size: 12),
+                                                                                    Expanded(
+                                                                                      child: Text(
+                                                                                        toolrequestcompletedlist[index].toolrqst_tool_name != null ? toolrequestcompletedlist[index].toolrqst_tool_name : "",
+                                                                                        style: boldTextStyle(),
+                                                                                        overflow: TextOverflow.clip,
+                                                                                      ),
                                                                                     ),
                                                                                   ],
+                                                                                ),
+                                                                                SizedBox(
+                                                                                  height: 4,
+                                                                                ),
+                                                                                Text(
+                                                                                  toolrequestcompletedlist[index].toolrqst_number != null ? toolrequestcompletedlist[index].toolrqst_number : "",
+                                                                                  style: primaryTextStyle(size: 16),
                                                                                 ),
                                                                                 SizedBox(
                                                                                   height: 4,
