@@ -103,8 +103,9 @@ class LoginScreenState extends State<LoginScreen> {
           child: SingleChildScrollView(
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.center,
               children: <Widget>[
-                50.height,
+                SizedBox(height: (context.height() - 500) / 2),
                 Text("Sign In", style: boldTextStyle(size: 24, color: black)),
                 Container(
                   margin: EdgeInsets.all(16),
